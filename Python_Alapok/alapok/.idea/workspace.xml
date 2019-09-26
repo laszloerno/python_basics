@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3a214b5-90d6-4026-ad66-f903a86cbbff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/.idea" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/.idea/alapok.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hello World.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/Alapok2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Include" afterDir="true" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hello World.py" beforeDir="false" afterPath="$PROJECT_DIR$/Hello World.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,6 +64,25 @@
   </component>
   <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration>C:\Users\laszl\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\laszl\Documents\PYTHON_BASICS\trunk\Python_Alapok\alapok" />
+          <option name="myCopyRoot" value="C:\Users\laszl\Documents\PYTHON_BASICS\trunk\Python_Alapok\alapok" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\laszl\Documents\PYTHON_BASICS\trunk\Python_Alapok\alapok" />
+          <option name="myCopyRoot" value="C:\Users\laszl\Documents\PYTHON_BASICS\trunk\Python_Alapok\alapok" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
