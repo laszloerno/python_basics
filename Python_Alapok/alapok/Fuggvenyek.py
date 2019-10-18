@@ -16,7 +16,7 @@ def add(*num):
 
 p(add(1,2,3))
 
-
+p(eval("3+1-4"))
 # osztalynevsor = [{"Nev":"Ernő", "Kor":"37"},
 #                 {"Nev":"Peti", "Kor":"13"}
 #                 ]
