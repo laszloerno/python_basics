@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3a214b5-90d6-4026-ad66-f903a86cbbff" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Gyak.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Objektumok.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/obj2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fuggvenyek.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fuggvenyek.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,28 +45,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Fuggvenyek">
-    <configuration name="Alapok2" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="alapok" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Alapok2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.Objektumok">
     <configuration name="Elagazasok" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="alapok" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -105,7 +88,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Hello World" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Gyak" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="alapok" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -117,7 +100,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Hello World.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Gyak.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -126,7 +109,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="email" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Objektumok" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="alapok" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -134,11 +117,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\laszl\Documents\PYTHON_BASICS\trunk\Python_Alapok\alapok\email.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Objektumok.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="obj2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="alapok" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/obj2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -149,11 +153,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Objektumok" />
+        <item itemvalue="Python.obj2" />
+        <item itemvalue="Python.Gyak" />
         <item itemvalue="Python.Fuggvenyek" />
         <item itemvalue="Python.Elagazasok" />
-        <item itemvalue="Python.email" />
-        <item itemvalue="Python.Alapok2" />
-        <item itemvalue="Python.Hello World" />
       </list>
     </recent_temporary>
   </component>

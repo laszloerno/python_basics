@@ -18,12 +18,9 @@ def add(*num):
 
 p(add(1,2,3))
 
-p(eval("3+1-4"))
+p(eval("add(9,9,9)"))
 
-print(eval('dir()', {'sqrt': sqrt, 'pow': pow}))
 
-a = 5
-print(eval('sqrt(a)', {'__builtins__': None}, {'a': a, 'sqrt': sqrt}))
 # osztalynevsor = [{"Nev":"Ernő", "Kor":"37"},
 #                 {"Nev":"Peti", "Kor":"13"}
 #                 ]
