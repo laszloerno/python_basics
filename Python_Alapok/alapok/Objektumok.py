@@ -1,3 +1,6 @@
+TYPES = types
+
+
 class Player():
     def __init__(self, nev, kor):
         self.name = nev
@@ -9,8 +12,8 @@ class Player():
 
 
 class Wizzard(Player):
-    def __init__(self,nev, kor, varazs):
-        super().__init__(nev,kor)
+    def __init__(self, nev, kor, varazs):
+        super().__init__(nev, kor)
         self.__varazsero = varazs
 
     def allapot(self):
@@ -25,5 +28,11 @@ erno = Player("Ernő",28)
 
 zoli = Player("Zoli",32)
 
-geza = Wizzard("Géza", 45,34)
+geza = Wizzard("Géza", 45, 4)
 geza.allapot()
+
+from types import FunctionType
+def methods(cls):
+    return [x for x, y in cls.__dict__.items() if type(y) == FunctionType]
+
+print(methods(Wizzard))
