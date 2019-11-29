@@ -33,22 +33,24 @@ def draw():
 
     if x < -200 or x > 200:
         ir.x = -ir.x
+        """
         turtle.colormode(255)
         r = random.randrange(0, 257, 10)
         g = random.randrange(0, 257, 10)
         b = random.randrange(0, 257, 10)
         turtle.color(r, g, b)
-
+        """
     if y < -200 or y > 200:
         ir.y = -ir.y
+        """
         turtle.colormode(255)
         r = random.randrange(0, 257, 10)
         g = random.randrange(0, 257, 10)
         b = random.randrange(0, 257, 10)
         turtle.color(r, g, b)
-
+        """
     # 4
-    """
+
     turtle.colormode(255)
     if x < 0 and y < 0:
         turtle.color(255, 0, 0)
@@ -61,8 +63,8 @@ def draw():
 
 
     if x < 0 and y > 0:
-        turtle.color(0, 100, 100)
-    """
+        turtle.color(255, 255, 0)
+
 
     print("X=" + str(ball.x))
     print("Y=" + str(ball.y))
@@ -73,7 +75,7 @@ def draw():
 
     turtle.ontimer(draw, 5)
 
-turtle.setup(420, 420, 370, 0)
+turtle.setup(420, 420, 300, 200)
 turtle.hideturtle()
 turtle.tracer(False)
 turtle.up()
