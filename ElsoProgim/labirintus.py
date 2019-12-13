@@ -17,12 +17,12 @@ def draw():
     color('black')
     width(5)
 
-    for x in range(-200, 200, 40):
-        for y in range(-200, 200, 40):
+    for x in range(-400, 400, 30):
+        for y in range(-400, 400, 30):
             if random() > 0.5:
-                line(x, y, x + 40, y + 40)
+                line(x, y, x +40, y + 40)
             else:
-                line(x, y + 40, x + 40, y)
+                line(x, y+40 , x + 40, y)
 
     update()
 
@@ -38,7 +38,7 @@ def tap(x, y):
     goto(x, y)
     dot(4)
 
-setup(420, 420, 370, 0)
+setup(800, 800, 370, 0)
 hideturtle()
 tracer(False)
 draw()

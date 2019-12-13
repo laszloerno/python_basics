@@ -32,7 +32,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.agyu">
+  <component name="RunManager" selected="Python.kigyo2">
     <configuration name="agyu" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ElsoProgim" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -75,7 +75,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="flappy" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="kigyo2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ElsoProgim" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -87,7 +87,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/flappy.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kigyo2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -96,7 +96,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pattog" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="labirintus" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ElsoProgim" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -108,7 +108,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pattog.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/labirintus.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -140,11 +140,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.kigyo2" />
+        <item itemvalue="Python.snake" />
+        <item itemvalue="Python.labirintus" />
         <item itemvalue="Python.agyu" />
         <item itemvalue="Python.fidget" />
-        <item itemvalue="Python.flappy" />
-        <item itemvalue="Python.snake" />
-        <item itemvalue="Python.pattog" />
       </list>
     </recent_temporary>
   </component>

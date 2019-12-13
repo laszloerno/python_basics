@@ -74,6 +74,7 @@ def move():
     turtle.ontimer(move, 50)
 
 turtle.setup(420, 420, 370, 0)
+turtle.title("Pontszam")
 turtle.hideturtle()
 turtle.up()
 turtle.tracer(False)
