@@ -51,6 +51,7 @@ tiles = [
 def square(x, y):
     "Draw square using path at (x, y)."
     path.up()
+
     path.goto(x, y)
     path.down()
     path.begin_fill()
@@ -145,6 +146,7 @@ def move():
 
     for point, course in ghosts:
         if abs(pacman - point) < 20:
+            exit(0)
             return
 
     ontimer(move, 100)
