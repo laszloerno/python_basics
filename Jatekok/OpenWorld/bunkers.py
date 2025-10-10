@@ -2,7 +2,7 @@ import pygame
 import random
 import time
 from chunk import get_chunk
-from parameters import  OBJECT_TYPES, RECIPES, item_names, CRAFT_TEXT_COLOR, CRAFT_NOT_POSSIBLE_COLOR
+from parameters import  OBJECT_TYPES, RECIPES, item_names, CRAFT_TEXT_COLOR, CRAFT_NOT_POSSIBLE_COLOR, get_item_capacity
 
 WIDTH = 1000
 HEIGHT = 700
@@ -245,11 +245,19 @@ while running:
                 if b is not None:
                     if event.key == pygame.K_1:
                         # deposit all
+                        stor = b["storage"]
                         for key in item_names:
                             amt = inventory.get(key,0)
-                            if amt > 0:
-                                b["storage"][key] += amt
-                                inventory[key] = 0
+                            cap = get_item_capacity(key)
+                            have = inventory.get(key, 0)
+                            current = stor.get(key, 0)
+                            free = max(0, cap - current)
+                            move = min(amt, free)
+
+                            if move > 0:
+                                stor[key] = current + move
+                                inventory[key] = have - move
+                            
                     elif event.key == pygame.K_2:
                         # withdraw all
                         for key in item_names:

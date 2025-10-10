@@ -62,3 +62,18 @@ RECIPES = {
         "key": pygame.K_p
     },
 }
+
+
+# ---- BUNKER CAPACITY ----
+BUNKER_MAX_PER_ITEM = 50  # alapértelmezett max / item
+
+# (opcionális) egyedi limitek itemenként:
+BUNKER_CAPACITY = {
+    # "wood": 100,
+    # "rock": 80,
+    # "mushroom": 60,
+    # "crystal": 30,
+    # ...
+}
+def get_item_capacity(key: str) -> int:
+    return BUNKER_CAPACITY.get(key, BUNKER_MAX_PER_ITEM)
