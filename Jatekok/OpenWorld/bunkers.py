@@ -2,6 +2,7 @@ import pygame
 import random
 import time
 from chunk import get_chunk
+from parameters import  OBJECT_TYPES, RECIPES, item_names, CRAFT_TEXT_COLOR, CRAFT_NOT_POSSIBLE_COLOR
 
 WIDTH = 1000
 HEIGHT = 700
@@ -25,24 +26,20 @@ font = pygame.font.SysFont(None,18)
 player_x, player_y = 0,0
 speed = 5
 
-item_names = {"tree":"Fa", 
-             "rock":"Kő", 
-             "mushroom":"Gomba", 
-             "crystal":"Kristály",
-             "zöldseg":"Zöldség",
-             "gyümölcs":"Gyümölcs",
-             "hus":"Hús",
-             "bör":"Bőr",
-             "bel":"Bél",
-             "toll":"Toll",
-             "vaserc":"Vasérc",
-             "varazskristaly":"Varázskristály"          
-             }
-
-
-
+PATH_STR = './Jatekok/OpenWorld/'
+OBJECT_IMAGES = {
+    "wood":pygame.image.load(PATH_STR + "tree.png").convert_alpha(),
+    "rock":pygame.image.load(PATH_STR + "rock.png").convert_alpha(),
+    "mushroom":pygame.image.load(PATH_STR + "mushroom.png").convert_alpha(),
+    "crystal":pygame.image.load(PATH_STR + "crystal.png").convert_alpha(),
+    'bokor':pygame.image.load(PATH_STR + 'bokor.png').convert_alpha(),
+    'varazskristaly':pygame.image.load(PATH_STR + 'varazskristaly.png').convert_alpha(),
+    'allat':pygame.image.load(PATH_STR + 'allat.png').convert_alpha(),
+    'madar':pygame.image.load(PATH_STR + 'madar.png').convert_alpha(),
+    'vaserc':pygame.image.load(PATH_STR + 'vaserc.png').convert_alpha()
+}
 # ----- INVENTORY -----
-inventory = {key : 0 for key in item_names}
+inventory = {key : 100 for key in item_names}
 
 # ----- RESPAWN -----
 respawn_list = []
@@ -70,52 +67,8 @@ def player_near_bunker_rect():
         if player_rect.colliderect(rect):
             return b, rect
     return None, None
-OBJECT_TYPES = {
-    "tree":(34,139,34),
-    "rock":(128,128,128),
-    "mushroom":(255,0,255),
-    "crystal":(0,255,255),
-    'bokor':(66, 171, 14),
-    'gyumolcs':(150, 44, 44),
-    'allat':(77, 51, 11),
-    'madar':(140, 93, 65),
-    'vaserc':(173, 169, 168),
-    'varazskristaly':(165, 58, 176)
-}
 
-PATH_STR = 'Jatekok/OpenWorld/'
-OBJECT_IMAGES = {
-    "tree":pygame.image.load(PATH_STR + "tree.png").convert_alpha(),
-    "rock":pygame.image.load(PATH_STR + "rock.png").convert_alpha(),
-    "mushroom":pygame.image.load(PATH_STR + "mushroom.png").convert_alpha(),
-    "crystal":pygame.image.load(PATH_STR + "crystal.png").convert_alpha(),
-    'bokor':pygame.image.load(PATH_STR + 'bokor.png').convert_alpha(),
-    'varazskristaly':pygame.image.load(PATH_STR + 'varazskristaly.png').convert_alpha(),
-    'allat':pygame.image.load(PATH_STR + 'allat.png').convert_alpha(),
-    'madar':pygame.image.load(PATH_STR + 'madar.png').convert_alpha(),
-    'vaserc':pygame.image.load(PATH_STR + 'vaserc.png').convert_alpha()
-}
-
-
-RECIPES = {
-    "balta": {
-        "name": "Balta",
-        "cost": {"tree": 1, "rock": 1},   # 1 fa + 1 kő
-        "key": pygame.K_b
-    },
-    "csakany": {
-        "name": "Csákány",
-        "cost": {"tree": 1, "rock": 2},   # példa: 1 fa + 2 kő
-        "key": pygame.K_c
-    },
-    "vas": {
-        "name": "Vas",
-        # példa recept: kristályból olvasztasz "vas"-at (csak demó)
-        "cost": {"crystal": 2},
-        "key": pygame.K_v
-    },
-}
-
+ 
 craft_message = ""
 craft_message_time = 0
 CRAFT_MSG_DURATION = 2.0  # másodperc
@@ -149,11 +102,88 @@ def try_craft(item_key):
     craft_message_time = time.time()
 
 
+def can_craft(inventory, cost:dict) -> bool:
+    for resource, need in cost.items():
+        if inventory.get(resource,0) < need:
+            return False
+    return True
+
+
+def craft_menu_display(surface,inventory,receptek,item_names, selected_idx, scroll, rows=16):
+    W,H = surface.get_size()
+    overlay = pygame.Surface((W,H), pygame.SRCALPHA)
+    overlay.fill((0,0,0,140))
+    surface.blit(overlay, (0,0))
+
+    panel_w, panel_h = 520, 360
+    panel_x = (W-panel_w) //2
+    panel_y = (H-panel_h) //2
+
+    pygame.draw.rect(surface, (235,235,240), (panel_x,panel_y,panel_w, panel_h), border_radius=10)
+    pygame.draw.rect(surface, (40, 40, 60), (panel_x, panel_y, panel_w, panel_h), width=2, border_radius=10)
+
+    title = font.render("CRAFT Menü (UP/DOWN választ, Enter craft, Esc/C bezár)", True, CRAFT_TEXT_COLOR)
+    surface.blit(title, (panel_x+10, panel_y+10))
+
+    recept_lista = [(k,v) for k,v in receptek.items()]
+    osszees_recept = len(recept_lista)
+
+    fejlec = font.render("Tárgy                         Költség", True, CRAFT_TEXT_COLOR)
+    surface.blit(fejlec, (panel_x+150, panel_y+25))
+
+
+    start = scroll
+    end = min(scroll+rows,osszees_recept)
+
+    row_y = panel_y + 80
+    row_h = 28
+
+    for idx in range(start,end):
+        key, data = recept_lista[idx]
+        name = data.get("name",key.capitalize())
+        cost = data.get("cost", {})
+
+        if selected_idx ==idx:
+            pygame.draw.rect(surface, (210, 225, 255), (panel_x + 10, row_y - 2, panel_w - 20, row_h), border_radius=6)
+       
+            
+        txt_name = font.render(name,True,CRAFT_TEXT_COLOR )
+        surface.blit(txt_name,(panel_x+100,row_y))
+
+        parts = []
+        for resource, need in cost.items():
+            label = item_names.get(resource,resource)
+            have = inventory.get(resource,0)
+            parts.append(f"{label} {have}/{need}")
+        cost_str = " | ".join(parts)
+
+        gyarthato = can_craft(inventory, cost)
+        
+        if gyarthato:
+            cost_txt = font.render(cost_str, True, CRAFT_TEXT_COLOR)
+        else:
+            cost_txt = font.render(cost_str, True, CRAFT_NOT_POSSIBLE_COLOR)
+        
+        surface.blit(cost_txt, (panel_x+300,row_y))
+
+        row_y += row_h
+      #  if osszees_recept > rows:
+
+
+
+
+
 MINIMAP_SIZE = 150
 MINIMAP_SCALE = 0.1
 minimap_surface = pygame.Surface((MINIMAP_SIZE,MINIMAP_SIZE))
 
 map_visible = False
+craft_menu = False
+craft_selected = 0
+craft_scroll = 0
+CRAFT_ROWS = 10
+
+inventory_visible = False
 running = True
 while running:
     screen.fill(BACKGROUND)
@@ -173,48 +203,69 @@ while running:
 
         # ----- KEYDOWN események: bunker építés / letét / felvét -----
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_m:
-                # pici debounce nélkül – ha kell, tedd vissza a sleep-et
-                map_visible = not map_visible
+            if event.key == pygame.K_c:
+                craft_menu = not craft_menu
+                continue
 
+            if craft_menu:
+                
+                recept_lista = list(RECIPES.items())
+                total = len(recept_lista)
+
+                if event.key == pygame.K_ESCAPE:
+                    craft_menu = False
+                elif event.key == pygame.K_UP:
+                    if total > 0:
+                        craft_selected = (craft_selected-1) % total
+                        if craft_selected < craft_scroll:
+                            craft_scroll = craft_selected
+                elif event.key == pygame.K_DOWN:
+                    if total > 0:
+                        craft_selected = (craft_selected+1) % total
+                        if craft_selected >= craft_scroll + CRAFT_ROWS:
+                            craft_scroll = craft_selected - CRAFT_ROWS + 1
+                elif event.key == pygame.K_RETURN:
+                    if 0 <= craft_selected < total:
+                        item_key, data = recept_lista[craft_selected]
+                        try_craft(item_key)
+
+
+            if event.key == pygame.K_m:
+                map_visible = not map_visible
+            elif event.key == pygame.K_i:
+                inventory_visible = not inventory_visible                     
             # Bunker építés: 5 fa
             elif event.key == pygame.K_b:
-                if inventory["tree"] >= 5:
-                    inventory["tree"] -= 5
+                if inventory["wood"] >= 5:
+                    inventory["wood"] -= 5
                     build_bunker_at(player_x, player_y)
-                # (külön UI üzenetet is írhatsz ki, ha kevés a fa)
 
-            # Bunker interakció (ha rajta állsz)
-            # Z = deposit all; X = withdraw all
-            elif event.key in (pygame.K_z, pygame.K_x):
+            elif event.key in (pygame.K_1, pygame.K_2):
                 b, _ = player_near_bunker_rect()
                 if b is not None:
-                    if event.key == pygame.K_z:
+                    if event.key == pygame.K_1:
                         # deposit all
-                        for k in ("tree","rock","mushroom","crystal","balta","csakany","vas","varazskristaly"):
-                            amt = inventory.get(k,0)
+                        for key in item_names:
+                            amt = inventory.get(key,0)
                             if amt > 0:
-                                b["storage"][k] += amt
-                                inventory[k] = 0
-                    elif event.key == pygame.K_x:
+                                b["storage"][key] += amt
+                                inventory[key] = 0
+                    elif event.key == pygame.K_2:
                         # withdraw all
-                        for k in ("tree","rock","mushroom","crystal","balta","csakany","vas","varazskristaly"):
-                            amt = b["storage"].get(k,0)
+                        for key in item_names:
+                            amt = b["storage"].get(key,0)
                             if amt > 0:
-                                inventory[k] += amt
-                                b["storage"][k] = 0
-            else:
-                # Végigmegyünk a recepteken, és ha az adott key-hez tartozik craft, csináljuk
-                for key_item, data in RECIPES.items():
-                    if event.key == data["key"]:
-                        try_craft(key_item)                
+                                inventory[key] += amt
+                                b["storage"][key] = 0
+                    
 
     # Mozgás
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]: player_x -= speed
-    if keys[pygame.K_RIGHT]: player_x += speed
-    if keys[pygame.K_UP]: player_y -= speed
-    if keys[pygame.K_DOWN]: player_y += speed
+    if not craft_menu:
+        if keys[pygame.K_LEFT]: player_x -= speed
+        if keys[pygame.K_RIGHT]: player_x += speed
+        if keys[pygame.K_UP]: player_y -= speed
+        if keys[pygame.K_DOWN]: player_y += speed
 
     cam_x = player_x - WIDTH//2
     cam_y = player_y - HEIGHT //2
@@ -244,7 +295,7 @@ while running:
                     pygame.draw.rect(screen, color, (screen_x,screen_y,TILE_SIZE, TILE_SIZE) )
 
                 tile_obj = pygame.Rect(world_x,world_y, TILE_SIZE, TILE_SIZE)
-                if player_obj.colliderect(tile_obj):
+                if not craft_menu and  player_obj.colliderect(tile_obj):
                     collectKey = pygame.key.get_pressed()
                     if collectKey[pygame.K_SPACE]:
                         'bokor','allat' 
@@ -260,8 +311,8 @@ while running:
                             inventory['bör'] = inventory['bör'] + 1
                             inventory['bel'] = inventory['bel'] + 1
                         elif obj["type"] == 'bokor':
-                            inventory['gyumolcs'] = inventory['gyumolcs'] + random.randint(1,2)
-                            inventory['tree'] = inventory['tree'] + 1
+                            inventory['gyümölcs'] = inventory['gyümölcs'] + random.randint(1,2)
+                            inventory["wood"] = inventory["wood"] + 1
                         else:
                             inventory[obj["type"]] = inventory[obj["type"]] + 1
                         
@@ -335,13 +386,14 @@ while running:
 
     # HUD: inventory
     
-    line_height = 18
-    starty = HEIGHT-30
-    for i, (key, value) in enumerate(inventory.items()):
-        label = item_names.get(key, key.capitalize())
-        line = f"{label}:{value}"
-        text_surface = font.render(line,True,TEXT1)
-        screen.blit(text_surface,(10, starty - i*line_height ))
+    if inventory_visible:
+        line_height = 18
+        starty = HEIGHT-30
+        for i, (key, value) in enumerate(inventory.items()):
+            label = item_names.get(key, key.capitalize())
+            line = f"{label}:{value}"
+            text_surface = font.render(line,True,TEXT1)
+            screen.blit(text_surface,(10, starty - i*line_height ))
 
 
     
@@ -352,19 +404,19 @@ while running:
         help1 = "[Z] Letét (összes), [X] Felvét (összes)"
         screen.blit(font.render(help1, True, (0,0,0)), (10, 10))
         stor = near_bunker["storage"]
-        stext = f"Bunker: Wood {stor['tree']}  Rock {stor['rock']}  Food {stor['mushroom']}  Crystal {stor['crystal']}"
+        stext = f"Bunker: Wood {stor['wood']}  Rock {stor['rock']}  Food {stor['mushroom']}  Crystal {stor['crystal']}"
         screen.blit(font.render(stext, True, (0,0,0)), (10, 28))
     else:
         # építés súgó
         build_help = "Bunker epites: [B] (kell 5 fa)"
         screen.blit(font.render(build_help, True, (0,0,0)), (10, 10))
 
-    help_text = "Craft: [B]=Balta (1 fa + 1 ko), [C]=Csakany (1 fa + 2 ko), [V]=Vas (2 kristaly)"
-    screen.blit(font.render(help_text, True, (0, 0, 0)), (10, 30))
+    if craft_menu:
+        craft_menu_display(screen, inventory,RECIPES,item_names,craft_selected,craft_scroll, CRAFT_ROWS)
+     
+        if craft_message and (now - craft_message_time) <= CRAFT_MSG_DURATION:
+            screen.blit(font.render(craft_message, True, (20, 20, 20)), (10, 35))
 
-  # Craft üzenet (siker/hiba)
-    if craft_message and (now - craft_message_time) <= CRAFT_MSG_DURATION:
-        screen.blit(font.render(craft_message, True, (20, 20, 20)), (10, 35))
 
     if map_visible:
         screen.blit(minimap_surface, (WIDTH-MINIMAP_SIZE-10 , 10 ))
