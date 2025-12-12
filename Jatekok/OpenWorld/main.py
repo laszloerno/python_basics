@@ -1,7 +1,7 @@
 import pygame
 import random
 import time
-from chunk import get_chunk
+from chunk import get_chunk, update_chunk_mobs
 from parameters import  OBJECT_TYPES, RECIPES, item_names, CRAFT_TEXT_COLOR, CRAFT_NOT_POSSIBLE_COLOR, get_item_capacity
 import craft
 import bunkers
@@ -117,8 +117,10 @@ while running:
         for dy in range(-1,VISIBLE_CHUNKS_Y):
             chunk_x = ( cam_x // ( CHUNK_SIZE*TILE_SIZE) ) + dx
             chunk_y = ( cam_y // ( CHUNK_SIZE*TILE_SIZE) ) + dy
+            update_chunk_mobs(chunk_x, chunk_y, now)            
             tiles = get_chunk(chunk_x, chunk_y)
-
+            
+            
             to_remove = []
             for obj in tiles:
                 world_x = chunk_x * CHUNK_SIZE * TILE_SIZE + obj["x"] *TILE_SIZE
