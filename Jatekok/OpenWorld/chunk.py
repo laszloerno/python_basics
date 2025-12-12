@@ -8,7 +8,7 @@ def generate_chunk(cx, cy):
     for x in range(CHUNK_SIZE):
         for y in range(CHUNK_SIZE):
             if random.random() < 0.005:
-                tiles.append({"type":"tree","x":x,"y":y})
+                tiles.append({"type":"wood","x":x,"y":y})
             if random.random() < 0.005:
                 tiles.append({"type":"bokor","x":x,"y":y})                
             if random.random() < 0.0015:

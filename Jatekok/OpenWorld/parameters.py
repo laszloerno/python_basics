@@ -15,7 +15,13 @@ item_names = {"wood":"Fa",
              "bel":"Bél",
              "toll":"Toll",
              "vaserc":"Vasérc",
-             "varazskristaly":"Varázskristály"          
+             "varazskristaly":"Varázskristály" ,
+            "balta":"Balta",
+            "csakany":"Csákány",
+            "vas":"Vas",
+            "varazspalca":"Varázspálca",
+            "ij":"Ij"
+
              }
 
 OBJECT_TYPES = {
@@ -63,17 +69,12 @@ RECIPES = {
     },
 }
 
+BUNKER_MAX_CAPACITY_PER_ITEM = 20
 
-# ---- BUNKER CAPACITY ----
-BUNKER_MAX_PER_ITEM = 50  # alapértelmezett max / item
-
-# (opcionális) egyedi limitek itemenként:
 BUNKER_CAPACITY = {
-    # "wood": 100,
-    # "rock": 80,
-    # "mushroom": 60,
-    # "crystal": 30,
-    # ...
+    "wood":50,
+    "hus":5,
 }
-def get_item_capacity(key: str) -> int:
-    return BUNKER_CAPACITY.get(key, BUNKER_MAX_PER_ITEM)
+
+def get_item_capacity(key:str):
+    return BUNKER_CAPACITY.get(key,BUNKER_MAX_CAPACITY_PER_ITEM)
